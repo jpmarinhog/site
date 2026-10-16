@@ -190,7 +190,19 @@ a{color:inherit}
 .who-cta p{font-size:clamp(1.05rem,1.4vw,1.2rem);max-width:36ch;font-family:var(--display);letter-spacing:-.025em;line-height:1.3}
 
 /* E-book */
-.ebook-sec{padding-block:clamp(24px,4vw,56px)}
+/* E-book (pop-up) */
+html.modal-open{overflow:hidden}
+.ebook-modal{border:0;padding:0;margin:auto;background:transparent;color:var(--paper);width:min(680px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 32px);overflow:auto}
+.ebook-modal::backdrop{background:rgba(16,16,16,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.ebook-modal[open]{animation:modal-in .4s cubic-bezier(.2,.7,.2,1)}
+.ebook-modal[open]::backdrop{animation:backdrop-in .4s ease}
+@keyframes modal-in{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes backdrop-in{from{opacity:0}to{opacity:1}}
+.ebook-modal .ebook-panel{grid-template-columns:1fr;align-items:start;border:1px solid var(--line-dark);padding:clamp(56px,8vw,72px) clamp(24px,5vw,56px) clamp(28px,5vw,56px)}
+.ebook-modal .ebook-panel .btn{justify-self:start}
+.ebook-close{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;border:1.5px solid var(--line-dark);background:rgba(16,16,16,.45);color:var(--paper);cursor:pointer;transition:border-color .2s}
+.ebook-close:hover{border-color:var(--paper)}
+.ebook-close svg{width:18px;height:18px}
 .ebook-panel{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:10px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:1fr auto;gap:32px clamp(24px,5vw,64px);align-items:end}
 .ebook-panel::after{content:"";position:absolute;inset:auto -10% -60% auto;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.2),transparent 68%);pointer-events:none}
 .ebook-num{position:absolute;right:clamp(8px,3vw,48px);top:-.14em;font-family:var(--display);font-weight:800;font-size:clamp(6rem,14vw,11rem);line-height:1;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.16);pointer-events:none;user-select:none}
@@ -240,6 +252,10 @@ a{color:inherit}
 .fab{display:none;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;width:60px;height:60px;border-radius:50%;background:var(--gold);color:var(--ink);align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .25s,transform .25s}
 .fab svg{width:28px;height:28px}
 .fab.away{opacity:0;pointer-events:none;transform:translateY(12px)}
+.fab-ig{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--paper);border:1.5px solid rgba(245,243,238,.35);box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .25s,transform .25s,border-color .2s}
+.fab-ig:hover{border-color:var(--paper)}
+.fab-ig svg{width:26px;height:26px}
+.fab-ig.away{opacity:0;pointer-events:none;transform:translateY(12px)}
 
 /* Tablet */
 @media (max-width:980px){
@@ -284,6 +300,7 @@ a{color:inherit}
   .svc .btn{align-self:stretch}
   .format .btn{align-self:stretch}
   .fab{display:inline-flex}
+  .fab-ig{right:20px;bottom:calc(88px + env(safe-area-inset-bottom,0px))}
   .footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 }
 @media (max-width:560px){
@@ -311,6 +328,11 @@ a{color:inherit}
   <symbol id="wa" viewBox="0 0 24 24">
     <path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
     <path d="M9 8.6c.3 3.4 3 6.1 6.4 6.4l1.1-1.5-2-1-.9.8c-1-.4-1.9-1.3-2.3-2.3l.8-.9-1-2z" fill="currentColor"/>
+  </symbol>
+  <symbol id="ig" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>
   </symbol>
 </svg>
 
@@ -532,23 +554,6 @@ a{color:inherit}
   </div>
 </section>
 
-<!-- E-BOOK -->
-<section class="section light ebook-sec" id="ebook" aria-labelledby="ebook-title">
-  <div class="wrap">
-    <div class="ebook-panel">
-      <span class="ebook-num" aria-hidden="true">10</span>
-      <div class="ebook-copy">
-        <p class="ebook-tag">E-book</p>
-        <h2 id="ebook-title">10 phrasal verbs que você precisa saber</h2>
-        <p>Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
-      </div>
-      <a class="btn btn-gold" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- 7. PARA QUEM -->
 <section class="section dark" id="para-quem" aria-labelledby="quem-title">
   <div class="wrap">
@@ -639,6 +644,25 @@ a{color:inherit}
 </footer>
 
 <a class="fab" id="fab" data-wa="geral" href="#contato" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
+<a class="fab-ig" id="fab-ig" data-ig href="#contato" target="_blank" rel="noopener noreferrer" aria-label="Siga no Instagram"><svg aria-hidden="true"><use href="#ig"/></svg></a>
+
+<!-- E-BOOK (pop-up exibido 5s após a entrada no site) -->
+<dialog class="ebook-modal" id="ebook-modal" aria-labelledby="ebook-title">
+  <div class="ebook-panel">
+    <button class="ebook-close" type="button" data-ebook-close aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <span class="ebook-num" aria-hidden="true">10</span>
+    <div class="ebook-copy">
+      <p class="ebook-tag">E-book</p>
+      <h2 id="ebook-title">10 phrasal verbs que você precisa saber</h2>
+      <p>Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
+    </div>
+    <a class="btn btn-gold" id="ebook-cta" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+    </a>
+  </div>
+</dialog>
 
 <script>
 /* =====================================================================
@@ -742,9 +766,36 @@ const CONFIG = {
   }
 
   // Botão flutuante some quando o CTA final está visível
-  var fab = $("#fab"), final = $("#contato");
+  var fab = $("#fab"), fabIg = $("#fab-ig"), final = $("#contato");
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (en) { fab.classList.toggle("away", en[0].isIntersecting); }, { threshold: .25 }).observe(final);
+    new IntersectionObserver(function (en) { fab.classList.toggle("away", en[0].isIntersecting); fabIg.classList.toggle("away", en[0].isIntersecting); }, { threshold: .25 }).observe(final);
+  }
+
+  // Pop-up do e-book: abre 5 segundos depois que a pessoa entra no site
+  var ebook = $("#ebook-modal");
+  if (ebook && typeof ebook.showModal === "function") {
+    var EBOOK_DELAY = 8000;            // tempo até aparecer (em milissegundos)
+    var EBOOK_KEY = "ebook-popup-visto";
+    var forceEbook = /[?&]ebook=popup/.test(location.search);   // para testar: adicione ?ebook=popup na URL
+    var seen = false;
+    try { seen = sessionStorage.getItem(EBOOK_KEY) === "1"; } catch (e) {}
+
+    var closeEbook = function () { if (ebook.open) ebook.close(); };
+    ebook.addEventListener("close", function () {
+      document.documentElement.classList.remove("modal-open");
+      try { sessionStorage.setItem(EBOOK_KEY, "1"); } catch (e) {}
+    });
+    ebook.addEventListener("click", function (e) { if (e.target === ebook) closeEbook(); });   // clique fora fecha
+    $$("[data-ebook-close]", ebook).forEach(function (b) { b.addEventListener("click", closeEbook); });
+    $("#ebook-cta").addEventListener("click", closeEbook);
+
+    var openEbook = function () {
+      if (ebook.open) return;
+      if (toggle.getAttribute("aria-expanded") === "true") { setTimeout(openEbook, 2000); return; }   // menu mobile aberto: tenta de novo depois
+      ebook.showModal();
+      document.documentElement.classList.add("modal-open");
+    };
+    if (forceEbook || !seen) setTimeout(openEbook, EBOOK_DELAY);
   }
 
   // Depoimentos
