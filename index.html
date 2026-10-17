@@ -289,6 +289,31 @@ html.js .rv.in{opacity:1;transform:none}
 .typing .tw-on::after{content:"";display:inline-block;width:.07em;min-width:2px;height:.9em;margin-left:.06em;background:var(--gold);vertical-align:-.08em;animation:caret .9s steps(1) infinite}
 @keyframes caret{50%{opacity:0}}
 
+/* E-books */
+.ebooks-head{display:grid;gap:22px;margin-bottom:clamp(32px,5vw,56px)}
+.ebook-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,32px)}
+.ebook{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:10px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;min-height:clamp(400px,42vw,470px)}
+.ebook::after{content:"";position:absolute;inset:auto -25% -50% auto;width:75%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.22),transparent 68%);opacity:.7;pointer-events:none;transition:opacity .4s}
+.ebook:hover::after{opacity:1}
+.ebook .num{font-family:var(--display);font-weight:800;font-size:clamp(5rem,9vw,7.5rem);line-height:.85;letter-spacing:-.07em;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.34);transition:-webkit-text-stroke-color .3s}
+.ebook:hover .num{-webkit-text-stroke-color:var(--gold)}
+.ebook-body{margin-top:auto;display:flex;flex-direction:column;gap:14px;position:relative;z-index:1}
+.ebook h3{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,2.1vw,1.75rem);letter-spacing:-.04em;line-height:1.1}
+.ebook p{color:var(--ash);font-size:.98rem;max-width:44ch}
+.ebook p.meta{color:var(--gold);font-size:.9rem;margin-top:-6px}
+.ebook .btn{align-self:flex-start;margin-top:8px}
+.ebook .btn svg{width:18px;height:18px}
+@media (max-width:820px){.ebook-grid{grid-template-columns:1fr}.ebook{min-height:380px}.ebook .btn{align-self:stretch}}
+
+/* Popup: opções de e-book */
+.pop-opts{display:grid;margin-top:6px}
+.pop-opts li{display:grid;grid-template-columns:1fr auto;gap:8px 18px;align-items:center;padding:16px 0;border-top:1px solid rgba(245,243,238,.18)}
+.pop-opts strong{display:block;font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:-.025em;line-height:1.25}
+.pop-opts span{display:block;color:var(--ash);font-size:.92rem;margin-top:2px}
+.pop-opts .btn{min-height:46px;padding:10px 22px;font-size:.92rem;white-space:nowrap}
+.pop-opts .btn svg{width:16px;height:16px}
+@media (max-width:560px){.pop-opts li{grid-template-columns:1fr}.pop-opts .btn{width:100%}}
+
 /* Aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(92vw,460px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.4);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:.95rem;box-shadow:0 12px 32px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -383,7 +408,7 @@ html.js .rv.in{opacity:1;transform:none}
         <li><a class="link" href="#como-funciona">Como funciona</a></li>
         <li><a class="link" href="#depoimentos" data-testimonials-link hidden>Depoimentos</a></li>
         <li><a class="link" href="#perguntas">Perguntas</a></li>
-        <li><a class="link" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book</a></li>
+        <li><a class="link" href="#ebooks">E-books</a></li>
       </ul>
       <a class="btn btn-gold" data-wa="geral" href="#contato" target="_blank" rel="noopener">
         <svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp
@@ -584,6 +609,35 @@ html.js .rv.in{opacity:1;transform:none}
   </div>
 </section>
 
+<!-- E-BOOKS -->
+<section class="section light" id="ebooks" aria-labelledby="ebooks-title">
+  <div class="wrap">
+    <div class="ebooks-head">
+      <h2 class="h2" id="ebooks-title">E-books para estudar no seu ritmo.</h2>
+      <p class="lead">Dois materiais para praticar e consultar quando quiser.</p>
+    </div>
+    <div class="ebook-grid">
+      <article class="ebook">
+        <span class="num" aria-hidden="true">10</span>
+        <div class="ebook-body">
+          <h3>10 phrasal verbs que você precisa saber</h3>
+          <p>Dez phrasal verbs para usar no inglês do dia a dia, reunidos em um e-book para estudar no seu ritmo.</p>
+          <a class="btn btn-gold" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="ebook">
+        <span class="num" aria-hidden="true">12</span>
+        <div class="ebook-body">
+          <h3>Guia Completo dos Tempos Verbais em Inglês</h3>
+          <p class="meta">41 páginas</p>
+          <p>Os 12 tempos verbais mais importantes, cada um em duas páginas: uma de estrutura, com conjugação, contrações e respostas curtas, e outra de uso, com exemplos traduzidos, palavras-chave e erros comuns.</p>
+          <a class="btn btn-gold" href="https://go.hotmart.com/W108078522K?dp=1" target="_blank" rel="noopener noreferrer">E-book - Tempos Verbais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- 7. PARA QUEM -->
 <section class="section dark" id="para-quem" aria-labelledby="quem-title">
   <div class="wrap">
@@ -667,7 +721,7 @@ html.js .rv.in{opacity:1;transform:none}
           <li><a class="link" href="#formatos">Formatos</a></li>
           <li><a class="link" href="#como-funciona">Como funciona</a></li>
           <li><a class="link" href="#perguntas">Perguntas</a></li>
-          <li><a class="link" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book</a></li>
+          <li><a class="link" href="#ebooks">E-books</a></li>
         </ul>
       </nav>
     </div>
@@ -681,15 +735,15 @@ html.js .rv.in{opacity:1;transform:none}
   <div class="pop-backdrop" data-pop-close></div>
   <div class="pop-card">
     <button class="pop-close" type="button" id="pop-close" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    <span class="pop-num" aria-hidden="true">10</span>
+    <span class="pop-num" aria-hidden="true">2</span>
     <div class="pop-body">
-      <p class="pop-tag" style="--i:0">E-book</p>
-      <h2 id="pop-title" style="--i:1">10 phrasal verbs que você precisa saber</h2>
-      <p class="t" id="pop-desc" style="--i:2">Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
+      <p class="pop-tag" style="--i:0">E-books</p>
+      <h2 id="pop-title" style="--i:1">Dois e-books para estudar no seu ritmo</h2>
+      <ul class="pop-opts" id="pop-desc" style="--i:2">
+        <li><div><strong>10 phrasal verbs que você precisa saber</strong><span>Para usar no inglês do dia a dia</span></div><a class="btn btn-gold" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">Conhecer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+        <li><div><strong>Guia Completo dos Tempos Verbais em Inglês</strong><span>41 páginas sobre os 12 tempos verbais</span></div><a class="btn btn-gold" href="https://go.hotmart.com/W108078522K?dp=1" target="_blank" rel="noopener noreferrer">Conhecer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+      </ul>
       <div class="pop-actions" style="--i:3">
-        <a class="btn btn-gold" id="pop-cta" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-        </a>
         <button class="pop-skip" type="button" data-pop-close>Agora não</button>
       </div>
     </div>
@@ -828,7 +882,7 @@ const CONFIG = {
   if (!reduceMotion && "IntersectionObserver" in window) {
     try {
       var singles = [".h2", ".lead", ".final h2", ".final p", ".final-actions", ".who-cta", ".format-note"];
-      var groups = [".pillars>.pillar", ".format-grid>.format", ".steps>.step", ".who-list>li", ".facts>.fact", ".faq details", ".svc"];
+      var groups = [".pillars>.pillar", ".format-grid>.format", ".steps>.step", ".who-list>li", ".facts>.fact", ".faq details", ".svc", ".ebook-grid>.ebook"];
       var items = [];
       singles.forEach(function (s) { $$(s).forEach(function (el) { items.push([el, 0]); }); });
       groups.forEach(function (g) { $$(g).forEach(function (el, i) { items.push([el, Math.min(i, g === ".svc" ? 3 : 5) * 90]); }); });
@@ -877,7 +931,7 @@ const CONFIG = {
   }
   $$("[data-pop-close]").forEach(function (el) { el.addEventListener("click", closePop); });
   popClose.addEventListener("click", closePop);
-  $("#pop-cta").addEventListener("click", function () { setTimeout(closePop, 200); });
+  $$("#pop a.btn").forEach(function (a) { a.addEventListener("click", function () { setTimeout(closePop, 200); }); });
   document.addEventListener("keydown", function (e) {
     if (!pop.classList.contains("open")) return;
     if (e.key === "Escape") { closePop(); return; }
