@@ -283,6 +283,12 @@ html.js .rv.in{opacity:1;transform:none}
   .pop-skip{text-align:center}
 }
 
+/* Efeito de digitação */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tw-off{visibility:hidden}
+.typing .tw-on::after{content:"";display:inline-block;width:.07em;min-width:2px;height:.9em;margin-left:.06em;background:var(--gold);vertical-align:-.08em;animation:caret .9s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+
 /* Aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(92vw,460px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.4);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:.95rem;box-shadow:0 12px 32px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -429,8 +435,8 @@ html.js .rv.in{opacity:1;transform:none}
     </div>
     <dl class="facts">
       <div class="fact"><dt>Experiência</dt><dd><strong><span data-count="14">14</span> anos</strong><span>ensinando inglês</span></dd></div>
-      <div class="fact"><dt>Vivência</dt><dd><strong>Estados Unidos</strong><span>experiência de vida no país</span></dd></div>
-      <div class="fact"><dt>Formação</dt><dd><strong>University of Arkansas</strong><span>parte da graduação cursada lá</span></dd></div>
+      <div class="fact"><dt>Vivência</dt><dd><strong data-type>Estados Unidos</strong><span>experiência de vida no país</span></dd></div>
+      <div class="fact"><dt>Formação</dt><dd><strong data-type>University of Arkansas</strong><span>parte da graduação cursada lá</span></dd></div>
       <div class="fact"><dt>Alunos</dt><dd><strong><span data-count="6">6</span> países</strong><span>onde moram meus alunos</span></dd></div>
     </dl>
   </div>
@@ -884,6 +890,26 @@ const CONFIG = {
     }
   });
   setTimeout(openPop, 8000);
+
+  // Efeito de digitação em "Estados Unidos" e "University of Arkansas"
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    $$("[data-type]").forEach(function (el, idx) {
+      var txt = el.textContent.trim();
+      el.innerHTML = '<span class="sr">' + txt + '</span><span aria-hidden="true"><span class="tw-on"></span><span class="tw-off">' + txt + '</span></span>';
+      var on = el.querySelector(".tw-on"), off = el.querySelector(".tw-off"), i = 0;
+      function tick() {
+        i++; on.textContent = txt.slice(0, i); off.textContent = txt.slice(i);
+        if (i < txt.length) setTimeout(tick, 55 + Math.random() * 45);
+        else setTimeout(function () { el.classList.remove("typing"); }, 2200);
+      }
+      var tio = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return;
+        tio.disconnect();
+        setTimeout(function () { el.classList.add("typing"); tick(); }, 700 + idx * 900);
+      }, { threshold: .6 });
+      tio.observe(el);
+    });
+  }
 
   // Botão flutuante some quando o CTA final está visível
   var fab = $("#fab"), seen = {};
