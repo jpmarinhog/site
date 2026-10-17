@@ -12,6 +12,7 @@
 <meta property="og:description" content="Seu inglês. Seus objetivos. Um plano feito para você. Aulas individuais e em dupla com acompanhamento personalizado.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101010'/%3E%3Cg fill='none' stroke='%23F5F3EE' stroke-width='6'%3E%3Cpath d='M20 14V34A11 11 0 0 1 9 45'/%3E%3Cpath d='M34 14V48'/%3E%3Cpath d='M34 17H42A9 9 0 0 1 42 35H34'/%3E%3C/g%3E%3Crect x='49' y='42' width='7' height='7' fill='%23F5C542'/%3E%3C/svg%3E">
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -190,19 +191,7 @@ a{color:inherit}
 .who-cta p{font-size:clamp(1.05rem,1.4vw,1.2rem);max-width:36ch;font-family:var(--display);letter-spacing:-.025em;line-height:1.3}
 
 /* E-book */
-/* E-book (pop-up) */
-html.modal-open{overflow:hidden}
-.ebook-modal{border:0;padding:0;margin:auto;background:transparent;color:var(--paper);width:min(680px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 32px);overflow:auto}
-.ebook-modal::backdrop{background:rgba(16,16,16,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.ebook-modal[open]{animation:modal-in .4s cubic-bezier(.2,.7,.2,1)}
-.ebook-modal[open]::backdrop{animation:backdrop-in .4s ease}
-@keyframes modal-in{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
-@keyframes backdrop-in{from{opacity:0}to{opacity:1}}
-.ebook-modal .ebook-panel{grid-template-columns:1fr;align-items:start;border:1px solid var(--line-dark);padding:clamp(56px,8vw,72px) clamp(24px,5vw,56px) clamp(28px,5vw,56px)}
-.ebook-modal .ebook-panel .btn{justify-self:start}
-.ebook-close{position:absolute;top:14px;right:14px;z-index:2;display:grid;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;border:1.5px solid var(--line-dark);background:rgba(16,16,16,.45);color:var(--paper);cursor:pointer;transition:border-color .2s}
-.ebook-close:hover{border-color:var(--paper)}
-.ebook-close svg{width:18px;height:18px}
+.ebook-sec{padding-block:clamp(24px,4vw,56px)}
 .ebook-panel{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:10px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:1fr auto;gap:32px clamp(24px,5vw,64px);align-items:end}
 .ebook-panel::after{content:"";position:absolute;inset:auto -10% -60% auto;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.2),transparent 68%);pointer-events:none}
 .ebook-num{position:absolute;right:clamp(8px,3vw,48px);top:-.14em;font-family:var(--display);font-weight:800;font-size:clamp(6rem,14vw,11rem);line-height:1;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.16);pointer-events:none;user-select:none}
@@ -237,7 +226,9 @@ html.modal-open{overflow:hidden}
 .final{text-align:left;padding-block:clamp(88px,13vw,180px)}
 .final h2{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4.6vw,3.8rem);letter-spacing:-.045em;line-height:.99;max-width:15ch;text-wrap:balance}
 .final p{margin-top:28px;color:var(--ash);font-size:clamp(1rem,1.3vw,1.15rem);max-width:44ch}
-.final .btn{margin-top:40px;min-height:60px;padding-inline:34px;font-size:1.05rem}
+.final-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+.final .btn{min-height:60px;padding-inline:30px;font-size:1.02rem}
+.mail-text{overflow-wrap:anywhere}
 
 /* Footer */
 .footer{background:var(--ink);color:var(--paper);border-top:1px solid var(--line-dark);padding:clamp(48px,6vw,80px) var(--gutter) 40px}
@@ -245,17 +236,27 @@ html.modal-open{overflow:hidden}
 .footer nav ul{display:flex;flex-wrap:wrap;gap:12px 28px}
 .footer a.link{color:var(--ash);text-decoration:none;transition:color .2s}
 .footer a.link:hover{color:var(--paper)}
-.footer-social{display:flex;gap:28px;margin-top:24px}
+.footer-social{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:24px}
 .footer-bottom{margin-top:clamp(40px,6vw,72px);padding-top:24px;border-top:1px solid var(--line-dark);color:var(--ash);font-size:.9rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 /* Botão flutuante (mobile) */
-.fab{display:none;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;width:60px;height:60px;border-radius:50%;background:var(--gold);color:var(--ink);align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .25s,transform .25s}
-.fab svg{width:28px;height:28px}
-.fab.away{opacity:0;pointer-events:none;transform:translateY(12px)}
-.fab-ig{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--paper);border:1.5px solid rgba(245,243,238,.35);box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .25s,transform .25s,border-color .2s}
-.fab-ig:hover{border-color:var(--paper)}
-.fab-ig svg{width:26px;height:26px}
-.fab-ig.away{opacity:0;pointer-events:none;transform:translateY(12px)}
+.floaters{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;flex-direction:column;gap:12px;transition:opacity .25s,transform .25s}
+.floaters.away{opacity:0;pointer-events:none;transform:translateY(12px)}
+.fab{display:inline-flex;width:56px;height:56px;border-radius:50%;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .2s}
+.fab:hover{transform:translateY(-2px)}
+.fab svg{width:26px;height:26px}
+.fab-wa{display:none;background:var(--gold);color:var(--ink)}
+.fab-ig{background:var(--ink);color:var(--paper);border:1.5px solid rgba(245,243,238,.45)}
+
+/* Animações ao rolar */
+html.js .rv{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+html.js .rv.in{opacity:1;transform:none}
+.hero-photo img{transform:scale(1.08);will-change:transform}
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;background:var(--gold);transform-origin:left;transform:scaleX(0);z-index:60;pointer-events:none}
+
+/* Aviso */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(92vw,460px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.4);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:.95rem;box-shadow:0 12px 32px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* Tablet */
 @media (max-width:980px){
@@ -299,8 +300,7 @@ html.modal-open{overflow:hidden}
   .rail-btns{display:none}
   .svc .btn{align-self:stretch}
   .format .btn{align-self:stretch}
-  .fab{display:inline-flex}
-  .fab-ig{right:20px;bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .fab-wa{display:inline-flex}
   .footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 }
 @media (max-width:560px){
@@ -329,14 +329,10 @@ html.modal-open{overflow:hidden}
     <path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
     <path d="M9 8.6c.3 3.4 3 6.1 6.4 6.4l1.1-1.5-2-1-.9.8c-1-.4-1.9-1.3-2.3-2.3l.8-.9-1-2z" fill="currentColor"/>
   </symbol>
-  <symbol id="ig" viewBox="0 0 24 24">
-    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
-    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
-    <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>
-  </symbol>
 </svg>
 
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="site-header">
   <div class="nav-bar">
@@ -404,10 +400,10 @@ html.modal-open{overflow:hidden}
       </div>
     </div>
     <dl class="facts">
-      <div class="fact"><dt>Experiência</dt><dd><strong>14 anos</strong><span>ensinando inglês</span></dd></div>
+      <div class="fact"><dt>Experiência</dt><dd><strong><span data-count="14">14</span> anos</strong><span>ensinando inglês</span></dd></div>
       <div class="fact"><dt>Vivência</dt><dd><strong>Estados Unidos</strong><span>experiência de vida no país</span></dd></div>
       <div class="fact"><dt>Formação</dt><dd><strong>University of Arkansas</strong><span>parte da graduação cursada lá</span></dd></div>
-      <div class="fact"><dt>Alunos</dt><dd><strong>6 países</strong><span>onde moram meus alunos</span></dd></div>
+      <div class="fact"><dt>Alunos</dt><dd><strong><span data-count="6">6</span> países</strong><span>onde moram meus alunos</span></dd></div>
     </dl>
   </div>
 </section>
@@ -554,6 +550,23 @@ html.modal-open{overflow:hidden}
   </div>
 </section>
 
+<!-- E-BOOK -->
+<section class="section light ebook-sec" id="ebook" aria-labelledby="ebook-title">
+  <div class="wrap">
+    <div class="ebook-panel">
+      <span class="ebook-num" aria-hidden="true">10</span>
+      <div class="ebook-copy">
+        <p class="ebook-tag">E-book</p>
+        <h2 id="ebook-title">10 phrasal verbs que você precisa saber</h2>
+        <p>Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
+      </div>
+      <a class="btn btn-gold" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- 7. PARA QUEM -->
 <section class="section dark" id="para-quem" aria-labelledby="quem-title">
   <div class="wrap">
@@ -597,7 +610,7 @@ html.modal-open{overflow:hidden}
       <details><summary>As aulas são online?</summary><div class="a">Tenho alunos em seis países, então a distância não é um obstáculo. Para combinar o formato que funciona no seu caso, <a data-wa="online" href="#contato" target="_blank" rel="noopener">fale comigo pelo WhatsApp</a>.</div></details>
       <details><summary>Como funciona o planejamento personalizado?</summary><div class="a">Começo entendendo seus objetivos e seu nível. A partir daí, defino o conteúdo, o ritmo e o foco das aulas, e ajusto o plano conforme você evolui.</div></details>
       <details><summary>Como saber qual modalidade é mais adequada para mim?</summary><div class="a">Na nossa primeira conversa, falamos sobre seus objetivos, sua rotina e seu nível, e identificamos juntos se individual ou em dupla faz mais sentido.</div></details>
-      <details><summary>Como faço para começar?</summary><div class="a">Basta <a data-wa="geral" href="#contato" target="_blank" rel="noopener">enviar uma mensagem pelo WhatsApp</a>. Vamos conversar sobre o que você precisa e conhecer as opções de aulas.</div></details>
+      <details><summary>Como faço para começar?</summary><div class="a">Basta <a data-wa="geral" href="#contato" target="_blank" rel="noopener">enviar uma mensagem pelo WhatsApp</a> ou escrever para <a data-mail href="mailto:falecomigo@teacherjoaopedro.com">falecomigo@teacherjoaopedro.com</a>. Vamos conversar sobre o que você precisa e conhecer as opções de aulas.</div></details>
     </div>
   </div>
 </section>
@@ -607,7 +620,10 @@ html.modal-open{overflow:hidden}
   <div class="wrap">
     <h2 id="final-title">Seu próximo passo no inglês começa com uma boa conversa.</h2>
     <p>Me conte o que você precisa e vamos descobrir como as aulas podem se encaixar nos seus objetivos.</p>
-    <a class="btn btn-gold" data-wa="geral" href="#contato" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Conversar pelo WhatsApp</a>
+    <div class="final-actions">
+      <a class="btn btn-gold" data-wa="geral" href="#contato" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Conversar pelo WhatsApp</a>
+      <a class="btn btn-line" data-mail href="mailto:falecomigo@teacherjoaopedro.com?subject=Contato%20pelo%20site&body=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro!%20Vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20meus%20objetivos%20com%20o%20ingl%C3%AAs."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="mail-text">falecomigo@teacherjoaopedro.com</span></a>
+    </div>
   </div>
 </section>
 
@@ -624,6 +640,7 @@ html.modal-open{overflow:hidden}
         <div class="footer-social">
           <a class="link" data-ig href="#contato" target="_blank" rel="noopener">Instagram</a>
           <a class="link" data-wa="geral" href="#contato" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="link" data-mail href="mailto:falecomigo@teacherjoaopedro.com">falecomigo@teacherjoaopedro.com</a>
         </div>
       </div>
       <nav aria-label="Rodapé">
@@ -643,26 +660,12 @@ html.modal-open{overflow:hidden}
   </div>
 </footer>
 
-<a class="fab" id="fab" data-wa="geral" href="#contato" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
-<a class="fab-ig" id="fab-ig" data-ig href="#contato" target="_blank" rel="noopener noreferrer" aria-label="Siga no Instagram"><svg aria-hidden="true"><use href="#ig"/></svg></a>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- E-BOOK (pop-up exibido 5s após a entrada no site) -->
-<dialog class="ebook-modal" id="ebook-modal" aria-labelledby="ebook-title">
-  <div class="ebook-panel">
-    <button class="ebook-close" type="button" data-ebook-close aria-label="Fechar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <span class="ebook-num" aria-hidden="true">10</span>
-    <div class="ebook-copy">
-      <p class="ebook-tag">E-book</p>
-      <h2 id="ebook-title">10 phrasal verbs que você precisa saber</h2>
-      <p>Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
-    </div>
-    <a class="btn btn-gold" id="ebook-cta" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-    </a>
-  </div>
-</dialog>
+<div class="floaters" id="fab">
+  <a class="fab fab-ig" data-ig href="#contato" target="_blank" rel="noopener noreferrer" aria-label="Instagram de João Pedro, abre em nova aba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor"/></svg></a>
+  <a class="fab fab-wa" data-wa="geral" href="#contato" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
+</div>
 
 <script>
 /* =====================================================================
@@ -715,6 +718,20 @@ const CONFIG = {
   // Ano
   $("#year").textContent = new Date().getFullYear();
 
+  // E-mail: copia o endereço e mostra um aviso, porque alguns aparelhos não abrem o app de e-mail
+  var toast = $("#toast"), tt;
+  function showToast(m) { toast.textContent = m; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove("show"); }, 4000); }
+  $$("[data-mail]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var addr = "falecomigo@teacherjoaopedro.com";
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(function () { showToast("Endereço copiado: " + addr); }, function () { showToast("Nosso e-mail: " + addr); });
+        } else { showToast("Nosso e-mail: " + addr); }
+      } catch (e) { showToast("Nosso e-mail: " + addr); }
+    });
+  });
+
   // Menu mobile
   var toggle = $(".menu-toggle"), menu = $("#menu");
   function setMenu(open) {
@@ -765,37 +782,54 @@ const CONFIG = {
     rail.addEventListener("dragstart",function(e){e.preventDefault();});
   }
 
-  // Botão flutuante some quando o CTA final está visível
-  var fab = $("#fab"), fabIg = $("#fab-ig"), final = $("#contato");
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (en) { fab.classList.toggle("away", en[0].isIntersecting); fabIg.classList.toggle("away", en[0].isIntersecting); }, { threshold: .25 }).observe(final);
+  // Animações ao rolar
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(c) {
+    var end = parseInt(c.getAttribute("data-count"), 10), t0 = null;
+    function f(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / 1100, 1); c.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); }
+    c.textContent = "0"; requestAnimationFrame(f);
+  }
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    try {
+      var singles = [".h2", ".lead", ".final h2", ".final p", ".final-actions", ".who-cta", ".format-note", ".ebook-panel"];
+      var groups = [".pillars>.pillar", ".format-grid>.format", ".steps>.step", ".who-list>li", ".facts>.fact", ".faq details", ".svc"];
+      var items = [];
+      singles.forEach(function (s) { $$(s).forEach(function (el) { items.push([el, 0]); }); });
+      groups.forEach(function (g) { $$(g).forEach(function (el, i) { items.push([el, Math.min(i, g === ".svc" ? 3 : 5) * 90]); }); });
+      var rvIO = new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target, d = parseInt(el.style.getPropertyValue("--d"), 10) || 0;
+          rvIO.unobserve(el); el.classList.add("in");
+          var c = el.querySelector("[data-count]"); if (c) setTimeout(function () { countUp(c); }, d);
+          setTimeout(function () { el.classList.remove("rv", "in"); el.style.removeProperty("--d"); }, 1000 + d);
+        });
+      }, { threshold: .12, rootMargin: "0px 0px -6% 0px" });
+      items.forEach(function (p) { p[0].classList.add("rv"); p[0].style.setProperty("--d", p[1] + "ms"); rvIO.observe(p[0]); });
+    } catch (err) {
+      $$(".rv").forEach(function (el) { el.classList.remove("rv"); });
+    }
   }
 
-  // Pop-up do e-book: abre 5 segundos depois que a pessoa entra no site
-  var ebook = $("#ebook-modal");
-  if (ebook && typeof ebook.showModal === "function") {
-    var EBOOK_DELAY = 8000;            // tempo até aparecer (em milissegundos)
-    var EBOOK_KEY = "ebook-popup-visto";
-    var forceEbook = /[?&]ebook=popup/.test(location.search);   // para testar: adicione ?ebook=popup na URL
-    var seen = false;
-    try { seen = sessionStorage.getItem(EBOOK_KEY) === "1"; } catch (e) {}
+  // Barra de progresso e leve paralaxe na foto do topo
+  var prog = $("#progress"), pimg = $(".hero-photo img"), ticking = false;
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight, y = window.scrollY;
+    if (prog) prog.style.transform = "scaleX(" + (h > 0 ? Math.min(y / h, 1) : 0) + ")";
+    if (pimg && !reduceMotion && y < window.innerHeight * 1.2) pimg.style.transform = "translate3d(0," + Math.min(y * .08, 28) + "px,0) scale(1.08)";
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
 
-    var closeEbook = function () { if (ebook.open) ebook.close(); };
-    ebook.addEventListener("close", function () {
-      document.documentElement.classList.remove("modal-open");
-      try { sessionStorage.setItem(EBOOK_KEY, "1"); } catch (e) {}
-    });
-    ebook.addEventListener("click", function (e) { if (e.target === ebook) closeEbook(); });   // clique fora fecha
-    $$("[data-ebook-close]", ebook).forEach(function (b) { b.addEventListener("click", closeEbook); });
-    $("#ebook-cta").addEventListener("click", closeEbook);
-
-    var openEbook = function () {
-      if (ebook.open) return;
-      if (toggle.getAttribute("aria-expanded") === "true") { setTimeout(openEbook, 2000); return; }   // menu mobile aberto: tenta de novo depois
-      ebook.showModal();
-      document.documentElement.classList.add("modal-open");
-    };
-    if (forceEbook || !seen) setTimeout(openEbook, EBOOK_DELAY);
+  // Botão flutuante some quando o CTA final está visível
+  var fab = $("#fab"), seen = {};
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { seen[e.target.tagName + e.target.id] = e.isIntersecting; });
+      fab.classList.toggle("away", Object.keys(seen).some(function (k) { return seen[k]; }));
+    }, { threshold: .15 });
+    io.observe($("#contato")); io.observe($(".footer"));
   }
 
   // Depoimentos
