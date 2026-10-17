@@ -120,7 +120,8 @@ a{color:inherit}
 .fact dt{font-size:.92rem;color:var(--muted-light)}
 .fact dd{margin:0}
 .fact strong{display:block;margin-top:10px;font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,2vw,1.8rem);letter-spacing:-.04em;line-height:1.08}
-.fact span{display:block;margin-top:10px;color:var(--muted-light);font-size:1rem}
+.fact dd>span{display:block;margin-top:10px;color:var(--muted-light);font-size:1rem}
+.fact strong [data-count]{display:inline;margin:0 .06em 0 0;color:inherit;font-size:2.1em;line-height:.9;letter-spacing:-.06em}
 
 /* Pilares */
 .pillars-head{display:grid;gap:24px;margin-bottom:clamp(40px,6vw,80px)}
@@ -190,18 +191,6 @@ a{color:inherit}
 .who-cta{margin-top:clamp(40px,6vw,72px);display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--line-dark);padding-top:clamp(28px,4vw,44px)}
 .who-cta p{font-size:clamp(1.05rem,1.4vw,1.2rem);max-width:36ch;font-family:var(--display);letter-spacing:-.025em;line-height:1.3}
 
-/* E-book */
-.ebook-sec{padding-block:clamp(24px,4vw,56px)}
-.ebook-panel{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:10px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:1fr auto;gap:32px clamp(24px,5vw,64px);align-items:end}
-.ebook-panel::after{content:"";position:absolute;inset:auto -10% -60% auto;width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.2),transparent 68%);pointer-events:none}
-.ebook-num{position:absolute;right:clamp(8px,3vw,48px);top:-.14em;font-family:var(--display);font-weight:800;font-size:clamp(6rem,14vw,11rem);line-height:1;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.16);pointer-events:none;user-select:none}
-.ebook-copy{position:relative;z-index:1;display:grid;gap:16px}
-.ebook-tag{color:var(--gold);font-size:.95rem}
-.ebook-copy h2{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.04em;line-height:1.05;max-width:16ch;text-wrap:balance}
-.ebook-copy p:last-child{color:var(--ash);max-width:40ch}
-.ebook-panel .btn{position:relative;z-index:1}
-.ebook-panel .btn svg{width:18px;height:18px}
-
 /* Depoimentos */
 #depoimentos[hidden]{display:none}
 .quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3vw,40px);margin-top:clamp(36px,5vw,64px)}
@@ -254,6 +243,46 @@ html.js .rv.in{opacity:1;transform:none}
 .hero-photo img{transform:scale(1.08);will-change:transform}
 .progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;background:var(--gold);transform-origin:left;transform:scaleX(0);z-index:60;pointer-events:none}
 
+/* Popup do e-book */
+.pop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;visibility:hidden;pointer-events:none}
+.pop.open{visibility:visible;pointer-events:auto}
+.pop-backdrop{position:absolute;inset:0;background:rgba(16,16,16,.66);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);opacity:0;transition:opacity .5s}
+.pop.open .pop-backdrop{opacity:1}
+.pop.out .pop-backdrop{opacity:0;transition-duration:.3s}
+.pop-card{position:relative;width:min(100%,640px);overflow:hidden;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.2);border-radius:14px;padding:clamp(28px,5vw,52px);box-shadow:0 40px 90px -30px rgba(0,0,0,.75);opacity:0}
+.pop.open .pop-card{animation:pop-in .95s cubic-bezier(.2,.8,.2,1) both}
+.pop.out .pop-card{animation:pop-out .3s ease-in both}
+.pop-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),rgba(245,197,66,0));transform-origin:left;transform:scaleX(0)}
+.pop.open .pop-card::before{animation:pop-sweep 1.1s .5s cubic-bezier(.2,.8,.2,1) forwards}
+.pop-card::after{content:"";position:absolute;inset:auto -15% -55% auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.26),transparent 68%);pointer-events:none}
+.pop-num{position:absolute;right:clamp(10px,3vw,36px);top:-.1em;font-family:var(--display);font-weight:800;font-size:clamp(8rem,22vw,12rem);line-height:1;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.18);pointer-events:none;user-select:none}
+.pop.open .pop-num{animation:pop-num 1.1s .25s cubic-bezier(.2,.8,.2,1) both}
+.pop-body{position:relative;z-index:1;display:grid;gap:16px}
+.pop.open .pop-body>*{animation:pop-rise .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.45s + var(--i,0) * 110ms)}
+.pop-tag{color:var(--gold);font-size:.95rem}
+.pop h2{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,4.2vw,2.5rem);letter-spacing:-.04em;line-height:1.05;max-width:15ch;text-wrap:balance}
+.pop-body p.t{color:var(--ash);max-width:40ch}
+.pop-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-top:10px}
+.pop-actions .btn svg{width:18px;height:18px}
+.pop-skip{background:none;border:0;color:var(--ash);font:inherit;cursor:pointer;padding:12px 6px;text-decoration:underline;text-underline-offset:4px;transition:color .2s}
+.pop-skip:hover{color:var(--paper)}
+.pop-close{position:absolute;top:14px;right:14px;z-index:2;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(245,243,238,.3);background:rgba(16,16,16,.6);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,background-color .2s}
+.pop-close:hover{border-color:var(--paper)}
+.pop-close svg{width:18px;height:18px}
+@keyframes pop-in{0%{opacity:0;transform:translateY(80px) scale(.82) rotate(-3deg)}55%{opacity:1;transform:translateY(-10px) scale(1.025) rotate(.7deg)}100%{opacity:1;transform:none}}
+@keyframes pop-out{to{opacity:0;transform:translateY(30px) scale(.94)}}
+@keyframes pop-sweep{to{transform:scaleX(1)}}
+@keyframes pop-num{from{opacity:0;transform:translateX(50px) scale(.9);-webkit-text-stroke-color:var(--gold)}}
+@keyframes pop-rise{from{opacity:0;transform:translateY(18px)}}
+@media (max-width:560px){
+  .pop{place-items:end center;padding:0}
+  .pop-card{width:100%;border-radius:18px 18px 0 0;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  @keyframes pop-in{0%{opacity:0;transform:translateY(100%)}60%{opacity:1;transform:translateY(-12px)}100%{opacity:1;transform:none}}
+  .pop-actions{flex-direction:column;align-items:stretch}
+  .pop-actions .btn{width:100%}
+  .pop-skip{text-align:center}
+}
+
 /* Aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(92vw,460px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.4);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:.95rem;box-shadow:0 12px 32px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -295,8 +324,7 @@ html.js .rv.in{opacity:1;transform:none}
   .step::before{top:24px;bottom:0;left:11px;right:auto;width:1.5px;height:auto}
   .step:nth-child(2)::before{display:block}
   .step:last-child::before{display:none}
-  .who-cta .btn,.final .btn,.ebook-panel .btn{width:100%}
-  .ebook-panel{grid-template-columns:1fr}
+  .who-cta .btn,.final .btn{width:100%}
   .rail-btns{display:none}
   .svc .btn{align-self:stretch}
   .format .btn{align-self:stretch}
@@ -550,23 +578,6 @@ html.js .rv.in{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- E-BOOK -->
-<section class="section light ebook-sec" id="ebook" aria-labelledby="ebook-title">
-  <div class="wrap">
-    <div class="ebook-panel">
-      <span class="ebook-num" aria-hidden="true">10</span>
-      <div class="ebook-copy">
-        <p class="ebook-tag">E-book</p>
-        <h2 id="ebook-title">10 phrasal verbs que você precisa saber</h2>
-        <p>Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
-      </div>
-      <a class="btn btn-gold" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- 7. PARA QUEM -->
 <section class="section dark" id="para-quem" aria-labelledby="quem-title">
   <div class="wrap">
@@ -659,6 +670,25 @@ html.js .rv.in{opacity:1;transform:none}
     </div>
   </div>
 </footer>
+
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title" aria-describedby="pop-desc">
+  <div class="pop-backdrop" data-pop-close></div>
+  <div class="pop-card">
+    <button class="pop-close" type="button" id="pop-close" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <span class="pop-num" aria-hidden="true">10</span>
+    <div class="pop-body">
+      <p class="pop-tag" style="--i:0">E-book</p>
+      <h2 id="pop-title" style="--i:1">10 phrasal verbs que você precisa saber</h2>
+      <p class="t" id="pop-desc" style="--i:2">Um material para estudar no seu ritmo, com dez phrasal verbs para usar no inglês do dia a dia.</p>
+      <div class="pop-actions" style="--i:3">
+        <a class="btn btn-gold" id="pop-cta" href="https://jpmarinhog.hotmart.host/10-phrasal-verbs-que-voce-precisa-saber-67191af4-2594-4d53-9573-61f7992c6707" target="_blank" rel="noopener noreferrer">E-book - Phrasal Verbs
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+        </a>
+        <button class="pop-skip" type="button" data-pop-close>Agora não</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -791,7 +821,7 @@ const CONFIG = {
   }
   if (!reduceMotion && "IntersectionObserver" in window) {
     try {
-      var singles = [".h2", ".lead", ".final h2", ".final p", ".final-actions", ".who-cta", ".format-note", ".ebook-panel"];
+      var singles = [".h2", ".lead", ".final h2", ".final p", ".final-actions", ".who-cta", ".format-note"];
       var groups = [".pillars>.pillar", ".format-grid>.format", ".steps>.step", ".who-list>li", ".facts>.fact", ".faq details", ".svc"];
       var items = [];
       singles.forEach(function (s) { $$(s).forEach(function (el) { items.push([el, 0]); }); });
@@ -821,6 +851,39 @@ const CONFIG = {
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
+
+  // Popup do e-book: aparece 8 segundos após a pessoa entrar no site
+  var pop = $("#pop"), popClose = $("#pop-close"), popPrev = null, popDone = false;
+  function openPop() {
+    if (popDone) return;
+    if (menu.classList.contains("open")) { setTimeout(openPop, 3000); return; }
+    popDone = true; popPrev = document.activeElement;
+    pop.classList.add("open"); document.body.style.overflow = "hidden";
+    setTimeout(function () { try { popClose.focus({ preventScroll: true }); } catch (e) { popClose.focus(); } }, 400);
+  }
+  function closePop() {
+    if (!pop.classList.contains("open") || pop.classList.contains("out")) return;
+    pop.classList.add("out");
+    setTimeout(function () {
+      pop.classList.remove("open", "out"); document.body.style.overflow = "";
+      if (popPrev && popPrev.focus) popPrev.focus();
+    }, 320);
+  }
+  $$("[data-pop-close]").forEach(function (el) { el.addEventListener("click", closePop); });
+  popClose.addEventListener("click", closePop);
+  $("#pop-cta").addEventListener("click", function () { setTimeout(closePop, 200); });
+  document.addEventListener("keydown", function (e) {
+    if (!pop.classList.contains("open")) return;
+    if (e.key === "Escape") { closePop(); return; }
+    if (e.key === "Tab") {
+      var f = $$("a[href],button", pop).filter(function (x) { return x.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  setTimeout(openPop, 8000);
 
   // Botão flutuante some quando o CTA final está visível
   var fab = $("#fab"), seen = {};
