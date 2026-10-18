@@ -408,7 +408,7 @@ html.js .rv.in{opacity:1;transform:none}
         <li><a class="link" href="#como-funciona">Como funciona</a></li>
         <li><a class="link" href="#depoimentos" data-testimonials-link hidden>Depoimentos</a></li>
         <li><a class="link" href="#perguntas">Perguntas</a></li>
-        <li><a class="link" href="#ebooks">E-books</a></li>
+        <li><a class="link" href="https://ebooks.teacherjoaopedro.com">E-books</a></li>
       </ul>
       <a class="btn btn-gold" data-wa="geral" href="#contato" target="_blank" rel="noopener">
         <svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp
@@ -721,7 +721,7 @@ html.js .rv.in{opacity:1;transform:none}
           <li><a class="link" href="#formatos">Formatos</a></li>
           <li><a class="link" href="#como-funciona">Como funciona</a></li>
           <li><a class="link" href="#perguntas">Perguntas</a></li>
-          <li><a class="link" href="#ebooks">E-books</a></li>
+          <li><a class="link" href="https://ebooks.teacherjoaopedro.com">E-books</a></li>
         </ul>
       </nav>
     </div>
@@ -740,8 +740,8 @@ html.js .rv.in{opacity:1;transform:none}
       <p class="pop-tag" style="--i:0">E-books</p>
       <h2 id="pop-title" style="--i:1">Dois e-books para estudar no seu ritmo</h2>
       <ul class="pop-opts" id="pop-desc" style="--i:2">
-        <li><div><strong>10 phrasal verbs que você precisa saber</strong><span>Para usar no inglês do dia a dia</span></div><a class="btn btn-gold" href="https://pay.hotmart.com/N108054761C" target="_blank" rel="noopener noreferrer">Conhecer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
-        <li><div><strong>Guia Completo dos Tempos Verbais em Inglês</strong><span>41 páginas sobre os 12 tempos verbais</span></div><a class="btn btn-gold" href="https://pay.hotmart.com/W108078522K" target="_blank" rel="noopener noreferrer">Conhecer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+        <li><div><strong>10 phrasal verbs que você precisa saber</strong><span>Para usar no inglês do dia a dia</span></div><a class="btn btn-gold" data-ebook="phrasal" href="https://pay.hotmart.com/N108054761C" target="_blank" rel="noopener noreferrer">Conhecer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
+        <li><div><strong>Guia Completo dos Tempos Verbais em Inglês</strong><span>41 páginas sobre os 12 tempos verbais</span></div><a class="btn btn-gold" data-ebook="tempos" href="https://pay.hotmart.com/W108078522K" target="_blank" rel="noopener noreferrer">Conhecer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></li>
       </ul>
       <div class="pop-actions" style="--i:3">
         <button class="pop-skip" type="button" data-pop-close>Agora não</button>
@@ -768,6 +768,10 @@ const CONFIG = {
 
   // 2) Instagram: endereço completo do perfil.
   instagram: "https://www.instagram.com/teacher.joaopedro",
+
+  // 1b) Página de e-books (com o livro de amostras). Preencha com o endereço dela, ex.: "https://ebooks.teacherjoaopedro.com".
+  //     Com isso, os botões "Conhecer" do popup abrem o livro do e-book correspondente. Vazio = vão direto para a compra.
+  ebooksPage: "https://ebooks.teacherjoaopedro.com",
 
   // 3) Mensagens pré-preenchidas por serviço/botão.
   messages: {
@@ -800,6 +804,11 @@ const CONFIG = {
     a.href = "https://wa.me/" + digits + "?text=" + encodeURIComponent(msg);
   });
   if (/^5500000+$/.test(digits)) console.warn("[João Pedro Guimarães] Número de WhatsApp ainda é o placeholder. Edite CONFIG.whatsapp.");
+
+  // Popup: abre o livro de amostras na página de e-books
+  $$("[data-ebook]").forEach(function (a) {
+    if (CONFIG.ebooksPage) a.href = CONFIG.ebooksPage.replace(/\/+$/, "") + "/#folhear-" + a.getAttribute("data-ebook");
+  });
 
   // Instagram
   $$("[data-ig]").forEach(function (a) { a.href = CONFIG.instagram; });
