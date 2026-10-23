@@ -288,6 +288,29 @@ html.js .rv.in{opacity:1;transform:none}
 .tw-off{visibility:hidden}
 .typing .tw-on::after{content:"";display:inline-block;width:.07em;min-width:2px;height:.9em;margin-left:.06em;background:var(--gold);vertical-align:-.08em;animation:caret .9s steps(1) infinite}
 @keyframes caret{50%{opacity:0}}
+/* Patches (termotransferidos) ao lado dos fatos */
+.fact-line{display:flex;align-items:center;gap:10px;margin-top:10px}
+.fact-line strong{margin-top:0;flex:1 1 auto;min-width:0}
+.patches{display:flex;align-items:center;gap:6px;flex:none}
+.patch{position:relative;display:block;width:40px;height:40px;transform:rotate(var(--r,0deg));filter:drop-shadow(0 1px 1.5px rgba(16,16,16,.35))}
+.patch.flag{width:54px;height:37px}
+.patch svg{display:block;width:100%;height:100%;overflow:visible}
+.patch::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);opacity:0;pointer-events:none}
+.patch.flag::after{border-radius:8px}
+html.js .patch{opacity:0}
+html.js .patch.stuck{animation:stick .95s cubic-bezier(.22,.8,.3,1) both;animation-delay:var(--d,0s)}
+html.js .patch.stuck::after{animation:press-ring .7s ease-out both;animation-delay:calc(var(--d,0s) + .5s)}
+@keyframes stick{
+  0%{opacity:0;transform:translateY(-38px) scale(1.75) rotate(calc(var(--r,0deg) - 16deg));filter:drop-shadow(0 26px 12px rgba(16,16,16,.0))}
+  22%{opacity:1;filter:drop-shadow(0 22px 10px rgba(16,16,16,.28))}
+  58%{opacity:1;transform:translateY(0) scale(.88) rotate(var(--r,0deg));filter:drop-shadow(0 0 0 rgba(16,16,16,.5))}
+  78%{transform:translateY(0) scale(1.06) rotate(var(--r,0deg));filter:drop-shadow(0 2px 2px rgba(16,16,16,.3))}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(var(--r,0deg));filter:drop-shadow(0 1px 1.5px rgba(16,16,16,.35))}
+}
+@keyframes press-ring{0%{opacity:.7;transform:scale(.9)}100%{opacity:0;transform:scale(1.55)}}
+@media (max-width:1100px) and (min-width:700px){.patch{width:36px;height:36px}.patch.flag{width:48px;height:33px}.fact-line{gap:8px}}
+@media (max-width:699px){.patch{width:48px;height:48px}.patch.flag{width:62px;height:42px}}
+
 
 /* E-books */
 .ebooks-head{display:grid;gap:22px;margin-bottom:clamp(32px,5vw,56px)}
@@ -460,8 +483,8 @@ html.js .rv.in{opacity:1;transform:none}
     </div>
     <dl class="facts">
       <div class="fact"><dt>Experiência</dt><dd><strong><span data-count="14">14</span> anos</strong><span>ensinando inglês</span></dd></div>
-      <div class="fact"><dt>Vivência</dt><dd><strong data-type>Estados Unidos</strong><span>experiência de vida no país</span></dd></div>
-      <div class="fact"><dt>Formação</dt><dd><strong data-type>University of Arkansas</strong><span>parte da graduação cursada lá</span></dd></div>
+      <div class="fact"><dt>Vivência</dt><dd><div class="fact-line"><strong data-type>Estados Unidos</strong><span class="patches" aria-hidden="true"><span class="patch flag" style="--d:0s;--r:-5deg"><svg viewBox="0 0 76 52" focusable="false"> <rect width="76" height="52" rx="7" fill="#fff"/> <clipPath id="fc"><rect x="4" y="4" width="68" height="44" rx="3.5"/></clipPath> <g clip-path="url(#fc)"><rect x="4" y="4.00" width="68" height="3.43" fill="#B22234"/><rect x="4" y="7.38" width="68" height="3.43" fill="#fff"/><rect x="4" y="10.77" width="68" height="3.43" fill="#B22234"/><rect x="4" y="14.15" width="68" height="3.43" fill="#fff"/><rect x="4" y="17.54" width="68" height="3.43" fill="#B22234"/><rect x="4" y="20.92" width="68" height="3.43" fill="#fff"/><rect x="4" y="24.31" width="68" height="3.43" fill="#B22234"/><rect x="4" y="27.69" width="68" height="3.43" fill="#fff"/><rect x="4" y="31.08" width="68" height="3.43" fill="#B22234"/><rect x="4" y="34.46" width="68" height="3.43" fill="#fff"/><rect x="4" y="37.85" width="68" height="3.43" fill="#B22234"/><rect x="4" y="41.23" width="68" height="3.43" fill="#fff"/><rect x="4" y="44.62" width="68" height="3.43" fill="#B22234"/><rect x="4" y="4" width="27.20" height="23.69" fill="#3C3B6E"/><circle cx="6.27" cy="5.32" r=".95" fill="#fff"/><circle cx="10.80" cy="5.32" r=".95" fill="#fff"/><circle cx="15.33" cy="5.32" r=".95" fill="#fff"/><circle cx="19.87" cy="5.32" r=".95" fill="#fff"/><circle cx="24.40" cy="5.32" r=".95" fill="#fff"/><circle cx="28.93" cy="5.32" r=".95" fill="#fff"/><circle cx="8.53" cy="7.95" r=".95" fill="#fff"/><circle cx="13.07" cy="7.95" r=".95" fill="#fff"/><circle cx="17.60" cy="7.95" r=".95" fill="#fff"/><circle cx="22.13" cy="7.95" r=".95" fill="#fff"/><circle cx="26.67" cy="7.95" r=".95" fill="#fff"/><circle cx="6.27" cy="10.58" r=".95" fill="#fff"/><circle cx="10.80" cy="10.58" r=".95" fill="#fff"/><circle cx="15.33" cy="10.58" r=".95" fill="#fff"/><circle cx="19.87" cy="10.58" r=".95" fill="#fff"/><circle cx="24.40" cy="10.58" r=".95" fill="#fff"/><circle cx="28.93" cy="10.58" r=".95" fill="#fff"/><circle cx="8.53" cy="13.21" r=".95" fill="#fff"/><circle cx="13.07" cy="13.21" r=".95" fill="#fff"/><circle cx="17.60" cy="13.21" r=".95" fill="#fff"/><circle cx="22.13" cy="13.21" r=".95" fill="#fff"/><circle cx="26.67" cy="13.21" r=".95" fill="#fff"/><circle cx="6.27" cy="15.85" r=".95" fill="#fff"/><circle cx="10.80" cy="15.85" r=".95" fill="#fff"/><circle cx="15.33" cy="15.85" r=".95" fill="#fff"/><circle cx="19.87" cy="15.85" r=".95" fill="#fff"/><circle cx="24.40" cy="15.85" r=".95" fill="#fff"/><circle cx="28.93" cy="15.85" r=".95" fill="#fff"/><circle cx="8.53" cy="18.48" r=".95" fill="#fff"/><circle cx="13.07" cy="18.48" r=".95" fill="#fff"/><circle cx="17.60" cy="18.48" r=".95" fill="#fff"/><circle cx="22.13" cy="18.48" r=".95" fill="#fff"/><circle cx="26.67" cy="18.48" r=".95" fill="#fff"/><circle cx="6.27" cy="21.11" r=".95" fill="#fff"/><circle cx="10.80" cy="21.11" r=".95" fill="#fff"/><circle cx="15.33" cy="21.11" r=".95" fill="#fff"/><circle cx="19.87" cy="21.11" r=".95" fill="#fff"/><circle cx="24.40" cy="21.11" r=".95" fill="#fff"/><circle cx="28.93" cy="21.11" r=".95" fill="#fff"/><circle cx="8.53" cy="23.74" r=".95" fill="#fff"/><circle cx="13.07" cy="23.74" r=".95" fill="#fff"/><circle cx="17.60" cy="23.74" r=".95" fill="#fff"/><circle cx="22.13" cy="23.74" r=".95" fill="#fff"/><circle cx="26.67" cy="23.74" r=".95" fill="#fff"/><circle cx="6.27" cy="26.38" r=".95" fill="#fff"/><circle cx="10.80" cy="26.38" r=".95" fill="#fff"/><circle cx="15.33" cy="26.38" r=".95" fill="#fff"/><circle cx="19.87" cy="26.38" r=".95" fill="#fff"/><circle cx="24.40" cy="26.38" r=".95" fill="#fff"/><circle cx="28.93" cy="26.38" r=".95" fill="#fff"/></g> <rect x="6.2" y="6.2" width="63.6" height="39.6" rx="2" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".9" stroke-dasharray="2.6 1.9"/> </svg></span></span></div><span>experiência de vida no país</span></dd></div>
+      <div class="fact"><dt>Formação</dt><dd><div class="fact-line"><strong data-type>University of Arkansas</strong><span class="patches" aria-hidden="true"><span class="patch" style="--d:0s;--r:-7deg"><svg viewBox="0 0 100 100" focusable="false"> <circle cx="50" cy="50" r="50" fill="#fff"/> <circle cx="50" cy="50" r="45" fill="#9D2235"/> <circle cx="50" cy="50" r="41.5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 2.2"/> <path fill="#fff" d="M27 79 L23 63 L15 59 L23 55 L17 47 L26 48 L23 39 L32 43 L33 32 L40 39 L44 28 L49 38 L56 31 L57 41 Q67 43 75 50 L84 54 Q88 58 85 64 L80 67 L71 66 L67 70 Q59 76 51 80 Z"/> <path fill="none" stroke="#9D2235" stroke-width="2" stroke-linejoin="round" d="M44 46 L50 36 L57 47 Z"/> <circle cx="61" cy="52" r="2.6" fill="#9D2235"/> <ellipse cx="82.5" cy="59" rx="1.8" ry="2.4" fill="#9D2235"/> <path fill="#fff" stroke="#9D2235" stroke-width="1.6" stroke-linejoin="round" d="M71 67 Q74 58 81 54 Q79 63 75 69 Z"/> </svg></span><span class="patch" style="--d:.35s;--r:6deg"><svg viewBox="0 0 100 100" focusable="false"> <defs><path id="arc" d="M50 85 a35 35 0 1 1 0 -70 a35 35 0 1 1 0 70"/></defs> <circle cx="50" cy="50" r="50" fill="#fff"/> <circle cx="50" cy="50" r="45" fill="#9D2235"/> <circle cx="50" cy="50" r="41.5" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 2.2"/> <text font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="8.2" fill="#fff" text-anchor="middle"><textPath href="#arc" startOffset="50%" textLength="118" lengthAdjust="spacing">UNIVERSITY OF ARKANSAS</textPath></text> <circle cx="50" cy="52" r="25" fill="#fff"/> <g fill="#9D2235"> <path d="M33 49 L50 37 L67 49 Z"/> <rect x="35" y="51" width="4" height="13"/><rect x="43" y="51" width="4" height="13"/><rect x="53" y="51" width="4" height="13"/><rect x="61" y="51" width="4" height="13"/> <rect x="32" y="65" width="36" height="3"/> </g> <text x="50" y="82" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="8" fill="#fff" text-anchor="middle" letter-spacing="1">1871</text> </svg></span></span></div><span>parte da graduação cursada lá</span></dd></div>
       <div class="fact"><dt>Alunos</dt><dd><strong><span data-count="6">6</span> países</strong><span>onde moram meus alunos</span></dd></div>
     </dl>
   </div>
@@ -955,6 +978,10 @@ const CONFIG = {
   setTimeout(openPop, 8000);
 
   // Efeito de digitação em "Estados Unidos" e "University of Arkansas"
+  function stick(el) {
+    var ln = el.closest(".fact-line");
+    if (ln) $$(".patch", ln).forEach(function (p) { p.classList.add("stuck"); });
+  }
   if (!reduceMotion && "IntersectionObserver" in window) {
     $$("[data-type]").forEach(function (el, idx) {
       var txt = el.textContent.trim();
@@ -963,7 +990,7 @@ const CONFIG = {
       function tick() {
         i++; on.textContent = txt.slice(0, i); off.textContent = txt.slice(i);
         if (i < txt.length) setTimeout(tick, 28 + Math.random() * 24);
-        else setTimeout(function () { el.classList.remove("typing"); }, 2200);
+        else { stick(el); setTimeout(function () { el.classList.remove("typing"); }, 2200); }
       }
       var tio = new IntersectionObserver(function (en) {
         if (!en[0].isIntersecting) return;
@@ -972,6 +999,8 @@ const CONFIG = {
       }, { threshold: .6 });
       tio.observe(el);
     });
+  } else {
+    $$(".patch").forEach(function (p) { p.classList.add("stuck"); });
   }
 
   // Botão flutuante some quando o CTA final está visível
