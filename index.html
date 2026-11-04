@@ -12,7 +12,7 @@
 <meta property="og:description" content="Seu inglês. Seus objetivos. Um plano feito para você. Aulas individuais e em dupla com acompanhamento personalizado.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101010'/%3E%3Cg fill='none' stroke='%23F5F3EE' stroke-width='6'%3E%3Cpath d='M20 14V34A11 11 0 0 1 9 45'/%3E%3Cpath d='M34 14V48'/%3E%3Cpath d='M34 17H42A9 9 0 0 1 42 35H34'/%3E%3C/g%3E%3Crect x='49' y='42' width='7' height='7' fill='%23F5C542'/%3E%3C/svg%3E">
-<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js")</script>
+<script>(function(){var d=document.documentElement;if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("js");try{if(!sessionStorage.getItem("jp-intro")||/[?&]intro\b/.test(location.search)){sessionStorage.setItem("jp-intro","1");d.classList.add("intro-on");}}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -107,8 +107,8 @@ a{color:inherit}
 .words span.on{opacity:1;transform:none}
 .hero-bar .formats{color:var(--ash);font-weight:400;font-size:clamp(.95rem,1.2vw,1.1rem);letter-spacing:-.01em;line-height:1.4;padding-bottom:.6rem}
 .enter{opacity:0;transform:translateY(28px);animation:enter .9s cubic-bezier(.2,.7,.2,1) forwards}
-.hero h1 span:nth-child(1){animation-delay:.05s}.hero h1 span:nth-child(2){animation-delay:.18s}.hero h1 span:nth-child(3){animation-delay:.31s}
-.hero .sub.enter{animation-delay:.5s}.hero-cta.enter{animation-delay:.62s}
+.hero h1 span:nth-child(1){--ed:.1s}.hero h1 span:nth-child(2){--ed:.28s}.hero h1 span:nth-child(3){--ed:.46s}
+.hero .sub.enter{--ed:.85s}.hero-cta.enter{--ed:1.05s}
 @keyframes enter{to{opacity:1;transform:none}}
 
 /* Autoridade */
@@ -238,8 +238,8 @@ a{color:inherit}
 .fab-ig{background:var(--ink);color:var(--paper);border:1.5px solid rgba(245,243,238,.45)}
 
 /* Animações ao rolar */
-html.js .rv{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
-html.js .rv.in{opacity:1;transform:none}
+html.js .rv{opacity:0;transform:translateY(48px) scale(.985);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.25s var(--ease),filter 1.1s var(--ease);transition-delay:var(--d,0ms)}
+html.js .rv.in{opacity:1;transform:none;filter:blur(0)}
 .hero-photo img{transform:scale(1.08);will-change:transform}
 .progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;background:var(--gold);transform-origin:left;transform:scaleX(0);z-index:60;pointer-events:none}
 
@@ -337,6 +337,66 @@ html.js .patch.stuck::after{animation:press-ring .7s ease-out both;animation-del
 .pop-opts .btn svg{width:16px;height:16px}
 @media (max-width:560px){.pop-opts li{grid-template-columns:1fr}.pop-opts .btn{width:100%}}
 
+/* Cinema: abertura, câmera, títulos, cortina, destaque */
+:root{--ease:cubic-bezier(.16,1,.3,1)}
+.intro{display:none}
+html.intro-on{--ih:1.2s}
+html.intro-on .intro{display:block;position:fixed;inset:0;z-index:300;pointer-events:none;animation:intro-gone 0s 2.3s forwards}
+.intro-p{position:absolute;left:0;right:0;height:50.3%;background:#101010}
+.intro-t{top:0;animation:intro-t 1s 1.1s cubic-bezier(.76,0,.24,1) forwards}
+.intro-b{bottom:0;animation:intro-b 1s 1.1s cubic-bezier(.76,0,.24,1) forwards}
+.intro-mark{position:absolute;left:50%;top:50%;width:min(34vw,170px);transform:translate(-50%,-50%);z-index:2;animation:mark-out .35s .95s ease-in forwards}
+.intro-mark svg{display:block;width:100%;height:auto;overflow:visible}
+.intro-mark path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .9s var(--ease) forwards}
+.intro-mark path:nth-child(2){animation-delay:.16s}.intro-mark path:nth-child(3){animation-delay:.32s}
+.intro-mark rect{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:dot-pop .45s .72s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes dot-pop{to{transform:scale(1)}}
+@keyframes mark-out{to{opacity:0;transform:translate(-50%,-50%) scale(.9)}}
+@keyframes intro-t{to{transform:translateY(-101%)}}
+@keyframes intro-b{to{transform:translateY(101%)}}
+@keyframes intro-gone{to{visibility:hidden}}
+.hero .enter{animation:enter-up 1.4s var(--ease) both;animation-delay:calc(var(--ih,0s) + var(--ed,0s))}
+.hero h1 span.enter{animation-name:line-in;animation-duration:1.7s}
+@keyframes enter-up{from{opacity:0;transform:translateY(40px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes line-in{from{opacity:0;transform:translateY(70%) rotate(1.6deg);filter:blur(14px);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:none;filter:blur(0);clip-path:inset(-15% -2% -25% -2%)}}
+.hero-photo{animation-delay:calc(var(--ih,0s) + .15s)}
+.hero-photo img{animation:push 3.4s var(--ease) both;animation-delay:var(--ih,0s);scale:1}
+@keyframes push{from{scale:1.2}to{scale:1}}
+.w{display:inline-block;opacity:0;transform:translateY(.6em) rotate(3deg);filter:blur(10px);transition:opacity 1s var(--ease),transform 1.2s var(--ease),filter 1s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
+.in>span>.w{opacity:1;transform:none;filter:blur(0)}
+.section.cin{clip-path:inset(0 calc((1 - var(--p,1)) * 3.4vw) round calc((1 - var(--p,1)) * 44px));will-change:clip-path}
+.svc::before,.ebook::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(245,197,66,.16),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.svc:hover::before,.ebook:hover::before{opacity:1}
+.hero-cta .btn,.final-actions .btn,.who-cta .btn{will-change:transform}
+
+/* Instagram */
+.ig-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px 40px;margin-bottom:clamp(28px,4vw,48px)}
+.ig-head>div{display:grid;gap:18px}
+.ig-head .btn svg{width:20px;height:20px}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,20px)}
+.ig-grid[hidden],.ig-card[hidden]{display:none}
+.ig-tile{position:relative;display:block;aspect-ratio:1;overflow:hidden;border-radius:10px;background:var(--ink-soft);color:var(--paper)}
+.ig-tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.ig-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,16,16,0) 45%,rgba(16,16,16,.72));opacity:0;transition:opacity .4s}
+.ig-tile:hover img,.ig-tile:focus-visible img{transform:scale(1.07)}
+.ig-tile:hover::after,.ig-tile:focus-visible::after{opacity:1}
+.ig-badge{position:absolute;top:12px;right:12px;z-index:2;width:28px;height:28px;color:#fff;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+.ig-open{position:absolute;left:14px;bottom:12px;z-index:2;font:600 .85rem/1 var(--display);color:#fff;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s var(--ease)}
+.ig-tile:hover .ig-open,.ig-tile:focus-visible .ig-open{opacity:1;transform:none}
+.ig-tile.in-t{animation:tile-in 1.1s var(--ease) both;animation-delay:calc(var(--i,0) * 90ms)}
+@keyframes tile-in{from{opacity:0;transform:translateY(36px) scale(.96);filter:blur(8px)}}
+.ig-tile.sk{background:linear-gradient(100deg,#1a1a19 30%,#2c2c2a 50%,#1a1a19 70%) 0 0/200% 100%;animation:shimmer 1.4s linear infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+.ig-card{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:12px;padding:clamp(32px,5vw,64px);display:grid;gap:16px;align-content:end;min-height:clamp(250px,28vw,330px)}
+.ig-card::after{content:"";position:absolute;inset:auto -15% -60% auto;width:65%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.22),transparent 68%);pointer-events:none}
+.ig-card .at{position:absolute;right:clamp(10px,3vw,40px);top:-.08em;font-family:var(--display);font-weight:800;font-size:clamp(9rem,22vw,16rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.16);pointer-events:none;user-select:none}
+.ig-card h3{position:relative;z-index:1;font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.04em;line-height:1.1}
+.ig-card p{position:relative;z-index:1;color:var(--ash);max-width:44ch}
+.ig-card .btn{position:relative;z-index:1;justify-self:start;margin-top:8px}
+.ig-card .btn svg{width:20px;height:20px}
+@media (max-width:700px){.ig-grid{grid-template-columns:1fr 1fr}.ig-card .btn,.ig-head .btn{width:100%;justify-self:stretch}}
+
 /* Aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(92vw,460px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.4);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:.95rem;box-shadow:0 12px 32px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -396,6 +456,10 @@ html.js .patch.stuck::after{animation:press-ring .7s ease-out both;animation-del
 </style>
 </head>
 <body>
+
+<div class="intro" aria-hidden="true"><i class="intro-p intro-t"></i><i class="intro-p intro-b"></i>
+  <div class="intro-mark"><svg viewBox="10 4 124 90" focusable="false"><g fill="none" stroke="#F5F3EE" stroke-width="13"><path pathLength="1" d="M36 8V58A24 24 0 0 1 12 82"/><path pathLength="1" d="M68 8V88.5"/><path pathLength="1" d="M68 14.5H86A19 19 0 0 1 86 52.5H68"/></g><rect x="118" y="74.5" width="14" height="14" fill="#F5C542"/></svg></div>
+</div>
 
 <!-- Símbolo da marca (monograma JP + ponto amarelo) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -680,6 +744,26 @@ html.js .patch.stuck::after{animation:press-ring .7s ease-out both;animation-del
   </div>
 </section>
 
+<!-- INSTAGRAM -->
+<section class="section light" id="instagram" aria-labelledby="ig-title">
+  <div class="wrap">
+    <div class="ig-head">
+      <div>
+        <h2 class="h2" id="ig-title">Últimos posts no Instagram.</h2>
+        <p class="lead">Acompanhe o perfil para ver as novidades e o que está rolando nas aulas.</p>
+      </div>
+      <a class="btn btn-line" data-ig href="#contato" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor"/></svg>Seguir @teacher.joaopedro</a>
+    </div>
+    <div class="ig-grid" id="ig-grid" hidden></div>
+    <div class="ig-card" id="ig-card">
+      <span class="at" aria-hidden="true">@</span>
+      <h3>@teacher.joaopedro</h3>
+      <p>Veja os posts mais recentes direto no Instagram.</p>
+      <a class="btn btn-gold" data-ig href="#contato" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor"/></svg>Abrir o Instagram</a>
+    </div>
+  </div>
+</section>
+
 <!-- 8. DEPOIMENTOS (oculta enquanto não houver depoimentos reais) -->
 <section class="section light" id="depoimentos" aria-labelledby="dep-title" hidden>
   <div class="wrap">
@@ -795,6 +879,10 @@ const CONFIG = {
   // 1b) Página de e-books (com o livro de amostras). Preencha com o endereço dela, ex.: "https://ebooks.teacherjoaopedro.com".
   //     Com isso, os botões "Conhecer" do popup abrem o livro do e-book correspondente. Vazio = vão direto para a compra.
   ebooksPage: "https://ebooks.teacherjoaopedro.com",
+
+  // 1c) Últimos posts do Instagram: cole aqui o endereço do feed JSON (ex.: "https://feeds.behold.so/SEU_ID").
+  //     Vazio = mostra um cartão com o link para o perfil.
+  instagramFeed: "",
 
   // 3) Mensagens pré-preenchidas por serviço/botão.
   messages: {
@@ -913,18 +1001,18 @@ const CONFIG = {
   }
   if (!reduceMotion && "IntersectionObserver" in window) {
     try {
-      var singles = [".h2", ".lead", ".final h2", ".final p", ".final-actions", ".who-cta", ".format-note"];
+      var singles = [".lead", ".final p", ".final-actions", ".who-cta", ".format-note", ".ig-card"];
       var groups = [".pillars>.pillar", ".format-grid>.format", ".steps>.step", ".who-list>li", ".facts>.fact", ".faq details", ".svc", ".ebook-grid>.ebook"];
       var items = [];
       singles.forEach(function (s) { $$(s).forEach(function (el) { items.push([el, 0]); }); });
-      groups.forEach(function (g) { $$(g).forEach(function (el, i) { items.push([el, Math.min(i, g === ".svc" ? 3 : 5) * 90]); }); });
+      groups.forEach(function (g) { $$(g).forEach(function (el, i) { items.push([el, Math.min(i, g === ".svc" ? 3 : 5) * 110]); }); });
       var rvIO = new IntersectionObserver(function (en) {
         en.forEach(function (e) {
           if (!e.isIntersecting) return;
           var el = e.target, d = parseInt(el.style.getPropertyValue("--d"), 10) || 0;
           rvIO.unobserve(el); el.classList.add("in");
           var c = el.querySelector("[data-count]"); if (c) setTimeout(function () { countUp(c); }, d);
-          setTimeout(function () { el.classList.remove("rv", "in"); el.style.removeProperty("--d"); }, 1000 + d);
+          setTimeout(function () { el.classList.remove("rv", "in"); el.style.removeProperty("--d"); }, 1600 + d);
         });
       }, { threshold: .12, rootMargin: "0px 0px -6% 0px" });
       items.forEach(function (p) { p[0].classList.add("rv"); p[0].style.setProperty("--d", p[1] + "ms"); rvIO.observe(p[0]); });
@@ -933,12 +1021,93 @@ const CONFIG = {
     }
   }
 
+  // Títulos palavra por palavra, cortina das seções, destaque nos cartões, botões magnéticos, rolagem suave e Instagram
+  var IO = "IntersectionObserver" in window, root = document.documentElement;
+  if (!reduceMotion && IO) {
+    var wio = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) { wio.unobserve(e.target); e.target.classList.add("in"); } });
+    }, { threshold: .35, rootMargin: "0px 0px -8% 0px" });
+    $$(".h2, .final h2").forEach(function (h) {
+      var t = h.textContent.replace(/\s+/g, " ").trim(), ws = t.split(" ");
+      h.innerHTML = '<span class="sr">' + t + '</span><span aria-hidden="true">' + ws.map(function (w, i) { return '<span class="w" style="--i:' + i + '">' + w + '</span>'; }).join(" ") + '</span>';
+      wio.observe(h);
+    });
+  }
+  var curtainEls = reduceMotion ? [] : $$(".section");
+  function curtain() {
+    var vh = window.innerHeight;
+    curtainEls.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top > vh * 1.1 || r.bottom < 0) return;
+      var p = Math.max(0, Math.min(1, (vh * .98 - r.top) / (vh * .5)));
+      if (p >= 1) { if (el.classList.contains("cin")) { el.classList.remove("cin"); el.style.removeProperty("--p"); } }
+      else { el.classList.add("cin"); el.style.setProperty("--p", p.toFixed(3)); }
+    });
+  }
+  if (window.matchMedia("(hover:hover)").matches && !reduceMotion) {
+    $$(".svc,.ebook").forEach(function (c) {
+      c.addEventListener("pointermove", function (e) { var r = c.getBoundingClientRect(); c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px"); });
+    });
+    $$(".hero-cta .btn,.final-actions .btn,.who-cta .btn").forEach(function (b) {
+      b.addEventListener("pointermove", function (e) {
+        var r = b.getBoundingClientRect(), dx = (e.clientX - r.left - r.width / 2) * .22, dy = (e.clientY - r.top - r.height / 2) * .3;
+        b.style.transition = "transform .15s ease-out"; b.style.transform = "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px)";
+      });
+      b.addEventListener("pointerleave", function () { b.style.transition = "transform .7s cubic-bezier(.16,1,.3,1)"; b.style.transform = ""; });
+    });
+  }
+  if (!reduceMotion) {
+    var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+      var id = a.getAttribute("href"); if (id.length < 2) return;
+      var t; try { t = document.querySelector(id); } catch (x) { return; }
+      if (!t) return;
+      e.preventDefault();
+      var s0 = window.scrollY, y = Math.max(0, t.getBoundingClientRect().top + s0 - 76), d = y - s0, t0 = null, dur = Math.min(1700, Math.max(800, Math.abs(d) * .45));
+      root.style.scrollBehavior = "auto";
+      requestAnimationFrame(function f(now) {
+        if (!t0) t0 = now;
+        var k = Math.min((now - t0) / dur, 1); window.scrollTo(0, s0 + d * ease(k));
+        if (k < 1) requestAnimationFrame(f); else root.style.scrollBehavior = "";
+      });
+    });
+  }
+
+  // Últimos posts do Instagram
+  var igGrid = $("#ig-grid"), igCard = $("#ig-card");
+  function igFallback() { igGrid.hidden = true; igGrid.innerHTML = ""; igCard.hidden = false; }
+  if (CONFIG.instagramFeed && window.fetch) {
+    igCard.hidden = true; igGrid.hidden = false;
+    igGrid.innerHTML = '<span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span>';
+    fetch(CONFIG.instagramFeed).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+      var posts = (Array.isArray(d) ? d : (d.posts || [])).map(function (p) {
+        var sz = p.sizes || {}, im = (sz.medium || sz.small || sz.large || {}).mediaUrl || p.thumbnailUrl || (p.mediaType !== "VIDEO" ? p.mediaUrl : "");
+        return { link: p.permalink, img: im, type: p.mediaType, cap: (p.caption || "").replace(/\s+/g, " ").slice(0, 110) };
+      }).filter(function (p) { return p.link && p.img; }).slice(0, 6);
+      if (!posts.length) throw 0;
+      igGrid.innerHTML = "";
+      var SVG = '<svg class="ig-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">';
+      posts.forEach(function (p, i) {
+        var a = document.createElement("a");
+        a.className = "ig-tile in-t"; a.style.setProperty("--i", i); a.href = p.link; a.target = "_blank"; a.rel = "noopener noreferrer";
+        a.setAttribute("aria-label", (p.cap || "Post do Instagram") + " (abre no Instagram)");
+        var im = new Image(); im.src = p.img; im.alt = ""; im.loading = "lazy"; a.appendChild(im);
+        var badge = p.type === "VIDEO" ? SVG + '<rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"/></svg>' : (p.type === "CAROUSEL_ALBUM" ? SVG + '<rect x="8" y="3.5" width="12.5" height="12.5" rx="2.5"/><path d="M4 8v9.5A2.5 2.5 0 0 0 6.5 20H16"/></svg>' : "");
+        a.insertAdjacentHTML("beforeend", badge + '<span class="ig-open">Ver no Instagram</span>');
+        igGrid.appendChild(a);
+      });
+    }).catch(igFallback);
+  } else { igFallback(); }
+
   // Barra de progresso e leve paralaxe na foto do topo
   var prog = $("#progress"), pimg = $(".hero-photo img"), ticking = false;
   function onScroll() {
     var h = document.documentElement.scrollHeight - window.innerHeight, y = window.scrollY;
     if (prog) prog.style.transform = "scaleX(" + (h > 0 ? Math.min(y / h, 1) : 0) + ")";
     if (pimg && !reduceMotion && y < window.innerHeight * 1.2) pimg.style.transform = "translate3d(0," + Math.min(y * .08, 28) + "px,0) scale(1.08)";
+    if (!reduceMotion) curtain();
     ticking = false;
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
