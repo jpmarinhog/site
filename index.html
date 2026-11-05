@@ -375,7 +375,7 @@ html.intro-on .intro{display:block;position:fixed;inset:0;z-index:300;pointer-ev
 .ig-head>div{display:grid;gap:18px}
 .ig-head .btn svg{width:20px;height:20px}
 .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,20px)}
-.ig-grid[hidden],.ig-card[hidden]{display:none}
+.ig-grid[hidden]{display:none}
 .ig-tile{position:relative;display:block;aspect-ratio:1;overflow:hidden;border-radius:10px;background:var(--ink-soft);color:var(--paper)}
 .ig-tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
 .ig-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,16,16,0) 45%,rgba(16,16,16,.72));opacity:0;transition:opacity .4s}
@@ -388,14 +388,7 @@ html.intro-on .intro{display:block;position:fixed;inset:0;z-index:300;pointer-ev
 @keyframes tile-in{from{opacity:0;transform:translateY(36px) scale(.96);filter:blur(8px)}}
 .ig-tile.sk{background:linear-gradient(100deg,#1a1a19 30%,#2c2c2a 50%,#1a1a19 70%) 0 0/200% 100%;animation:shimmer 1.4s linear infinite}
 @keyframes shimmer{to{background-position:-200% 0}}
-.ig-card{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-radius:12px;padding:clamp(32px,5vw,64px);display:grid;gap:16px;align-content:end;min-height:clamp(250px,28vw,330px)}
-.ig-card::after{content:"";position:absolute;inset:auto -15% -60% auto;width:65%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.22),transparent 68%);pointer-events:none}
-.ig-card .at{position:absolute;right:clamp(10px,3vw,40px);top:-.08em;font-family:var(--display);font-weight:800;font-size:clamp(9rem,22vw,16rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(245,243,238,.16);pointer-events:none;user-select:none}
-.ig-card h3{position:relative;z-index:1;font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3vw,2.4rem);letter-spacing:-.04em;line-height:1.1}
-.ig-card p{position:relative;z-index:1;color:var(--ash);max-width:44ch}
-.ig-card .btn{position:relative;z-index:1;justify-self:start;margin-top:8px}
-.ig-card .btn svg{width:20px;height:20px}
-@media (max-width:700px){.ig-grid{grid-template-columns:1fr 1fr}.ig-card .btn,.ig-head .btn{width:100%;justify-self:stretch}}
+@media (max-width:700px){.ig-grid{grid-template-columns:repeat(3,1fr);gap:8px}.ig-badge{width:22px;height:22px;top:8px;right:8px}.ig-open{display:none}.ig-head .btn{width:100%}}
 
 /* Aviso */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;max-width:min(92vw,460px);transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:1px solid rgba(245,243,238,.4);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;font-size:.95rem;box-shadow:0 12px 32px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}
@@ -745,7 +738,7 @@ html.intro-on .intro{display:block;position:fixed;inset:0;z-index:300;pointer-ev
 </section>
 
 <!-- INSTAGRAM -->
-<section class="section light" id="instagram" aria-labelledby="ig-title">
+<section class="section light" id="instagram" aria-labelledby="ig-title" hidden>
   <div class="wrap">
     <div class="ig-head">
       <div>
@@ -755,12 +748,6 @@ html.intro-on .intro{display:block;position:fixed;inset:0;z-index:300;pointer-ev
       <a class="btn btn-line" data-ig href="#contato" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor"/></svg>Seguir @teacher.joaopedro</a>
     </div>
     <div class="ig-grid" id="ig-grid" hidden></div>
-    <div class="ig-card" id="ig-card">
-      <span class="at" aria-hidden="true">@</span>
-      <h3>@teacher.joaopedro</h3>
-      <p>Veja os posts mais recentes direto no Instagram.</p>
-      <a class="btn btn-gold" data-ig href="#contato" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor"/></svg>Abrir o Instagram</a>
-    </div>
   </div>
 </section>
 
@@ -1001,7 +988,7 @@ const CONFIG = {
   }
   if (!reduceMotion && "IntersectionObserver" in window) {
     try {
-      var singles = [".lead", ".final p", ".final-actions", ".who-cta", ".format-note", ".ig-card"];
+      var singles = [".lead", ".final p", ".final-actions", ".who-cta", ".format-note"];
       var groups = [".pillars>.pillar", ".format-grid>.format", ".steps>.step", ".who-list>li", ".facts>.fact", ".faq details", ".svc", ".ebook-grid>.ebook"];
       var items = [];
       singles.forEach(function (s) { $$(s).forEach(function (el) { items.push([el, 0]); }); });
@@ -1075,17 +1062,17 @@ const CONFIG = {
     });
   }
 
-  // Últimos posts do Instagram
-  var igGrid = $("#ig-grid"), igCard = $("#ig-card");
-  function igFallback() { igGrid.hidden = true; igGrid.innerHTML = ""; igCard.hidden = false; }
+  // Últimos posts do Instagram (a seção só aparece quando há posts reais para mostrar)
+  var igSec = $("#instagram"), igGrid = $("#ig-grid");
+  function igHide() { igSec.hidden = true; igGrid.hidden = true; igGrid.innerHTML = ""; }
   if (CONFIG.instagramFeed && window.fetch) {
-    igCard.hidden = true; igGrid.hidden = false;
-    igGrid.innerHTML = '<span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span>';
+    igSec.hidden = false; igGrid.hidden = false;
+    igGrid.innerHTML = '<span class="ig-tile sk"></span><span class="ig-tile sk"></span><span class="ig-tile sk"></span>';
     fetch(CONFIG.instagramFeed).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
       var posts = (Array.isArray(d) ? d : (d.posts || [])).map(function (p) {
         var sz = p.sizes || {}, im = (sz.medium || sz.small || sz.large || {}).mediaUrl || p.thumbnailUrl || (p.mediaType !== "VIDEO" ? p.mediaUrl : "");
         return { link: p.permalink, img: im, type: p.mediaType, cap: (p.caption || "").replace(/\s+/g, " ").slice(0, 110) };
-      }).filter(function (p) { return p.link && p.img; }).slice(0, 6);
+      }).filter(function (p) { return p.link && p.img; }).slice(0, 3);
       if (!posts.length) throw 0;
       igGrid.innerHTML = "";
       var SVG = '<svg class="ig-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true">';
@@ -1098,8 +1085,8 @@ const CONFIG = {
         a.insertAdjacentHTML("beforeend", badge + '<span class="ig-open">Ver no Instagram</span>');
         igGrid.appendChild(a);
       });
-    }).catch(igFallback);
-  } else { igFallback(); }
+    }).catch(igHide);
+  }
 
   // Barra de progresso e leve paralaxe na foto do topo
   var prog = $("#progress"), pimg = $(".hero-photo img"), ticking = false;
